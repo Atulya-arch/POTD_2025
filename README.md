@@ -1,2 +1,2 @@
-# Day_1
+# January
 This is my first Repository and I am here
