@@ -1,0 +1,40 @@
+class Solution {
+public:
+    typedef pair<int, int> P;
+    vector<vector<int>> directions{{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+    vector<vector<int>> highestPeak(vector<vector<int>>& isWater) {
+        int m=isWater.size();
+        int n=isWater[0].size();
+        vector<vector<int>> height(m, vector<int>(n, -1));
+        queue<P> que;
+        //Heigth of water cells must be 0 only
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(isWater[i][j]==1){ //It is a Water cell
+                    height[i][j]=0; //Source for hitting BFS
+                    que.push({i, j});
+                } 
+            }
+        }
+        //Apply Multi-Source BFS traversal technique
+        while(!que.empty()){
+            int N=que.size();
+            while(N--){
+                P current=que.front();
+                que.pop();
+
+                int i=current.first;
+                int j=current.second;
+                for(auto& dir: directions){
+                    int i2=i+dir[0];
+                    int j2=j+dir[1];
+                    if(i2>=0 && i2<m && j2>=0 && j2<n && height[i2][j2]==-1){
+                        height[i2][j2]=height[i][j]+1;
+                        que.push({i2, j2});
+                    }
+                }
+            }
+        }
+        return height;
+    }
+};

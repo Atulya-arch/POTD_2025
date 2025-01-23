@@ -1,0 +1,14 @@
+class Solution {
+public:
+    vector<int> findThePrefixCommonArray(vector<int>& A, vector<int>& B) {
+        int n=A.size();
+        vector<int> prefixCommon(n), frequency(n+1, 0);
+        int count=0;
+        for(int curr=0; curr<n; curr++){
+            if(++frequency[A[curr]]==2) ++count;
+            if(++frequency[B[curr]]==2) ++count;
+            prefixCommon[curr]=count;
+        }
+        return prefixCommon;
+    }
+};
